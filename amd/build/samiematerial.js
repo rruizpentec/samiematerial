@@ -1,0 +1,1 @@
+define(["jquery","jqueryui"],function(a){function b(b){var c=a("#askquestion").val(),d=window.confirm(c);if(d===!0){var e=document.getElementById("coursefileform");document.getElementById("action").value="delete",document.getElementById("file_id").value=b,e.submit()}}var c=-1;return{confirm_deletion:b,init:function(a){c=a}}});

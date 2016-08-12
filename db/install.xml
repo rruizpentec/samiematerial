@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/samiematerial/db" VERSION="20111220" COMMENT="XMLDB file for Moodle blocks/samiematerial"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="block_samiematerial_up" COMMENT="block_samiematerial_up table retrofitted from MySQL" NEXT="block_samiematerial_down">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="50" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="filename"/>
+        <FIELD NAME="filename" TYPE="text" LENGTH="150" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="description" NEXT="afg_id"/>
+        <FIELD NAME="afg_id" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="filename" NEXT="afg_type"/>
+        <FIELD NAME="afg_type" TYPE="text" LENGTH="2" NOTNULL="false" SEQUENCE="false" PREVIOUS="afg_id" NEXT="deleted"/>
+        <FIELD NAME="deleted" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="afg_type" NEXT="realfilename" DEFAULT="0"/>
+        <FIELD NAME="realfilename" TYPE="text" LENGTH="150" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="deleted"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="realfilename" NEXT="uploaded_date"/>
+        <FIELD NAME="uploaded_date" TYPE="text" LENGTH="11" NOTNULL="false" SEQUENCE="false" PREVIOUS="userid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="block_samiematerial_down" COMMENT="block_samiematerial_down table retrofitted from MySQL">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="fileid"/>
+        <FIELD NAME="fileid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="fileid" NEXT="downloaded_date"/>
+        <FIELD NAME="downloaded_date" TYPE="text" LENGTH="11" NOTNULL="false" SEQUENCE="false" PREVIOUS="userid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="UNIQUE" UNIQUE="true" FIELDS="fileid, userid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

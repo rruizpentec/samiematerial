@@ -1,0 +1,36 @@
+.block_samiematerial_filelink {
+    cursor: pointer;
+}
+
+.block_samiematerial_filelink:hover {
+    text-decoration: underline;
+}
+
+.block_samiematerial_filepickerbutton  .fp-btn-choose {
+    width: 95%;
+    margin-bottom: 5px;
+}
+
+.block_samiematerial_descriptionfile {
+    width: 95%;
+}
+
+.block_samiematerial_descriptionfile_btn {
+    width: 90%;
+    margin-bottom: 5px;
+}
+
+.block_samiematerial_mimetypeimg {
+    width: 20px;
+    height: 20px;
+}
+
+.block_samiematerial_nodatafound {
+    font-style: italic;
+    text-align: center;
+}
+
+.block_samiematerial .btn {
+    margin-top: 5px;
+    width: 93%;
+}
