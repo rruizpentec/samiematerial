@@ -73,6 +73,11 @@ class block_samiematerial extends block_base {
         }
     }
 
+    /**
+     * Returns the upload file form and processes upload actions
+     *
+     * @return form
+     */
     private static function get_files_form ($coursecontext) {
         global $USER, $CFG, $DB, $COURSE;
         $form = null;
@@ -115,17 +120,8 @@ class block_samiematerial extends block_base {
                     }
                     $completedir = $path.'/'.$uniquename;
                     if ($form->save_file('userfile', $completedir, true)) {
-                        $record = new stdClass();
-                        $record->description = ($description == '' ? $name : $description);
-                        $record->filename = $name;
-                        $record->afg_id = $afgid;
-                        $record->afg_type = $categorytype;
-                        $record->deleted = 0;
-                        $record->realfilename = $uniquename;
-                        $record->userid = $USER->id;
-                        $record->uploaded_date = date('Y-m-d H:i:s');
-                        $DB->insert_record('block_samiematerial_up', $record, false);
-                        // Redirect to avoid submiting the same file twice.
+                        self::store_file ($description, $name, $afgid, $categorytype, $uniquename, $USER);
+                        // Redirect to avoid submitting the same file twice.
                         header('Location: view.php?id='.$COURSE->id);
                     }
                 } else {
@@ -135,9 +131,30 @@ class block_samiematerial extends block_base {
         }
         return $form;
     }
-
+    
     /**
+     * Stores a record of an uploaded file
      *
+     * @return string
+     */
+    private function store_file ($description, $name, $afgid, $categorytype, $uniquename, $USER) {
+        global $DB;
+        $record = new stdClass();
+        $record->description = ($description == '' ? $name : $description);
+        $record->filename = $name;
+        $record->afg_id = $afgid;
+        $record->afg_type = $categorytype;
+        $record->deleted = 0;
+        $record->realfilename = $uniquename;
+        $record->userid = $USER->id;
+        $record->uploaded_date = date('Y-m-d H:i:s');
+        $DB->insert_record('block_samiematerial_up', $record, false);
+    }
+    
+    /**
+     * Returns html code with the files table
+     *
+     * @return string
      */
     private function get_files_table($course, $coursecontext) {
         global $USER, $DB, $CFG;
@@ -221,7 +238,7 @@ class block_samiematerial extends block_base {
      * @return string
      */
     public function get_content() {
-        global $COURSE, $DB, $CFG, $PAGE, $USER;
+        global $COURSE, $CFG, $PAGE, $USER;
 
         $PAGE->requires->js_call_amd('block_samiematerial/samiematerial', 'init', array($USER->id));
         if (isset($this->content)) {
