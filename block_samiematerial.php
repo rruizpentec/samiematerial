@@ -79,7 +79,7 @@ class block_samiematerial extends block_base {
      * @return form
      */
     private static function get_files_form ($coursecontext) {
-        global $USER, $CFG, $DB, $COURSE;
+        global $USER, $CFG, $COURSE;
         $form = null;
         if (has_capability('block/samiematerial:managefiles', $coursecontext, $USER, true)) {
             $form = new block_samiematerial_form();
@@ -131,7 +131,7 @@ class block_samiematerial extends block_base {
         }
         return $form;
     }
-    
+
     /**
      * Stores a record of an uploaded file
      *
@@ -150,7 +150,7 @@ class block_samiematerial extends block_base {
         $record->uploaded_date = date('Y-m-d H:i:s');
         $DB->insert_record('block_samiematerial_up', $record, false);
     }
-    
+
     /**
      * Returns html code with the files table
      *
